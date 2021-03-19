@@ -1,0 +1,195 @@
+:root {
+  --color-prime: #c9d1d9;
+  --color-main-canvas: #0d1117;
+  --color-alt-canvas: #161b22;
+}
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  background-color: var(--color-main-canvas);
+  color: var(--color-prime);
+  text-align: center;
+  padding-bottom: 5vh;
+
+  .NewImage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    margin: 1rem;
+
+    .url-input {
+      display: flex;
+      width: 50%;
+      height: 50%;
+
+      form {
+        display: flex;
+        width: 100%;
+        height: 100%;
+
+        #img-url {
+          width: 75%;
+          height: 100%;
+          font-size: 2rem;
+        }
+
+        #submit {
+          width: 25%;
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  .Gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    min-height: 90vh;
+
+    .Slider {
+      display: flex;
+      flex-direction: row;
+      width: 75%;
+      height: 80vh;
+      border: 0.1px solid var(--color-prime);
+
+      .Picture {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+        height: 100%;
+        overflow: hidden;
+        background-color: black;
+
+        .image {
+          display: none;
+          opacity: 0;
+          min-width: 100%;
+          max-height: 100%;
+          transform: translate3d(-10000px, 0px, 0px);
+        }
+
+        .active {
+          display: flex;
+          opacity: 1;
+          transform: translate3d(0px, 0px, 0px);
+          animation: sliderAnimation 0.5s;
+        }
+
+        @keyframes sliderAnimation {
+          0% {
+            opacity: 0;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
+      }
+
+      .slider-arrows {
+        background-color: var(--color-alt-canvas);
+        border: 0.1px solid var(--color-prime);
+        width: 10vw;
+        transition: 0.4s;
+        color: var(--color-prime);
+        font-size: 5rem;
+        outline: none;
+      }
+
+      .slider-arrows:hover {
+        background-color: #161b2267;
+        color: #c9d1d99a;
+      }
+    }
+
+    .Panel {
+      display: flex;
+      flex-flow: column wrap;
+      background-color: var(--color-alt-canvas);
+      border: 0.1px solid var(--color-prime);
+      width: 75%;
+      min-height: 5vh;
+
+      .buttons {
+        display: flex;
+        width: 100%;
+        height: 5vh;
+
+        button {
+          width: 25%;
+          height: 100%;
+          background-color: var(--color-main-canvas);
+          color: var(--color-prime);
+        }
+      }
+
+      .CommentsBox {
+        width: 100%;
+        height: fit-content;
+        min-height: 15vh;
+
+        .CommentInput {
+          display: flex;
+          place-content: center;
+          height: fit-content;
+          min-height: 7.5vh;
+          border: 1px solid black;
+          border-left: 0;
+          border-right: 0;
+          margin-bottom: 1rem;
+
+          .user-info {
+            display: flex;
+            flex-flow: column wrap;
+            place-content: center;
+            width: 25%;
+
+            input {
+              height: 33.3%;
+            }
+          }
+
+          #text {
+            width: 75%;
+            padding: 1rem;
+            margin: 1rem;
+            border-radius: 25px;
+            outline: none;
+            font-size: 1.2rem;
+          }
+        }
+
+        .Comment {
+          display: flex;
+          height: fit-content;
+          min-height: 7.5vh;
+
+          .user {
+            width: 25%;
+            height: 100%;
+          }
+
+          #text {
+            display: flex;
+            place-content: center;
+            width: 65%;
+            height: 100%;
+          }
+
+          .upvotes {
+            // display: flex;
+            // place-content: center;
+            width: 10%;
+          }
+        }
+      }
+    }
+  }
+}
