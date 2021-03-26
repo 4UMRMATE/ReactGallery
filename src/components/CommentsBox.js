@@ -2,20 +2,25 @@ import Comment from "./Comment";
 import CommentInput from "./CommentInput";
 import axios from "axios";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { assignComments } from "../actions";
 
 export default function CommentsBox() {
-  const [comments, setComments] = useState(["a"]);
+  const comments = useSelector((state) => state.comments);
+  const commenting = useSelector((state) => state.commenting);
+  const pictures = useSelector((state) => state.pictures);
+  const index = useSelector((state) => state.activeIndex);
+  const dispatch = useDispatch();
 
   const fetchComments = async (picture_id) => {
     try {
       await axios
         .get(
-          `https://ms-gallery-api.herokuapp.com/api/gallery/comment/?picture_id=60548d846660ce0015392f33`
-          //   ${picture_id}`
+          `https://ms-gallery-api.herokuapp.com/api/gallery/comment/?picture_id=${picture_id}`
         )
         .then((res) => {
-          setComments(res.data.comments);
+          dispatch(assignComments(res.data.comments));
         });
     } catch (error) {
       console.error(error);
@@ -23,14 +28,15 @@ export default function CommentsBox() {
   };
 
   useEffect(() => {
-    fetchComments();
-  }, []);
+    fetchComments(pictures[index]._id);
+  }, [index, commenting]);
 
   return (
     <div className="CommentsBox">
-      <CommentInput />
-      {comments.map((comment) => (
+      <CommentInput picture_id={pictures[index]._id} />
+      {comments.map((comment, idx) => (
         <Comment
+          key={idx}
           username={comment.author}
           avatar={comment.avatar}
           text={comment.text}

@@ -4,6 +4,11 @@
   --color-alt-canvas: #161b22;
 }
 
+[contenteditable="true"]:empty:before {
+  content: attr(aria-placeholder);
+  display: block; /* For Firefox */
+}
+
 .App {
   width: 100vw;
   height: 100vh;
@@ -19,7 +24,11 @@
     justify-content: center;
     align-items: center;
     height: 10vh;
-    margin: 1rem;
+    margin: 1.25rem;
+
+    #title {
+      margin: 0.5rem;
+    }
 
     .url-input {
       display: flex;
@@ -35,6 +44,7 @@
           width: 75%;
           height: 100%;
           font-size: 2rem;
+          padding: 0.5rem;
         }
 
         #submit {
@@ -105,7 +115,8 @@
 
       .slider-arrows:hover {
         background-color: #161b2267;
-        color: #c9d1d99a;
+        color: #2ab26a; //#c9d1d99a;
+        border: 1px solid #2ab26a;
       }
     }
 
@@ -125,8 +136,8 @@
         button {
           width: 25%;
           height: 100%;
-          background-color: var(--color-main-canvas);
-          color: var(--color-prime);
+          // background-color: var(--color-main-canvas);
+          // color: var(--color-prime);
         }
       }
 
@@ -137,8 +148,12 @@
 
         .CommentInput {
           display: flex;
-          place-content: center;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          // place-content: center;
           height: fit-content;
+          width: 100%;
           min-height: 7.5vh;
           border: 1px solid black;
           border-left: 0;
@@ -148,16 +163,25 @@
           .user-info {
             display: flex;
             flex-flow: column wrap;
-            place-content: center;
+            align-items: center;
+            justify-content: space-between;
             width: 25%;
+            height: 10vh;
+            padding: 1rem;
+            margin: 1rem;
 
             input {
-              height: 33.3%;
+              height: 50%;
+              padding: 0.5rem;
+              font-size: 1rem;
             }
           }
 
-          #text {
+          #comment-input {
+            background-color: var(--color-main-canvas);
             width: 75%;
+            height: 100%;
+            min-height: 50px;
             padding: 1rem;
             margin: 1rem;
             border-radius: 25px;
@@ -168,8 +192,10 @@
 
         .Comment {
           display: flex;
+          align-items: center;
           height: fit-content;
           min-height: 7.5vh;
+          margin: 1rem;
 
           .user {
             width: 25%;
@@ -184,12 +210,62 @@
           }
 
           .upvotes {
-            // display: flex;
-            // place-content: center;
+            display: flex;
+            place-content: center;
             width: 10%;
+            font-size: 1.4rem;
+
+            p,
+            #upvote,
+            #downvote {
+              width: 33.3%;
+              // width: 25%;
+              // height: 50%;
+            }
           }
         }
       }
     }
+  }
+}
+
+input {
+  background-color: var(--color-main-canvas);
+  color: var(--color-prime);
+  outline: none;
+}
+
+input:focus {
+  border-bottom: 2px solid #2ab26a;
+}
+
+button {
+  background-color: var(--color-main-canvas);
+  color: var(--color-prime);
+  transition: 0.25s;
+}
+
+button:hover {
+  background-color: #2ab26a;
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 10px solid #f3f3f3; /* Light grey */
+  border-top: 10px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

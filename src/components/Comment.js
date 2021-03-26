@@ -13,8 +13,8 @@ export default function Comment(props) {
       </div>
       <p id="text">{props.text}</p>
       <div className="upvotes">
-        <p>{props.upvotes}</p>
         <button id="upvote">+</button>
+        <p>{props.upvotes}</p>
         <button id="downvote">-</button>
       </div>
     </div>

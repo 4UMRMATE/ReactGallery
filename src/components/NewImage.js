@@ -18,7 +18,7 @@ export default function NewImage() {
 
   return (
     <div className="NewImage">
-      <h1>Add Your Own Image</h1>
+      <h1 id="title">Add Your Own Image</h1>
       <div className="url-input">
         <form>
           <input
@@ -26,6 +26,7 @@ export default function NewImage() {
             type="url"
             onChange={handleChange}
             placeholder="https://"
+            autoComplete="off"
           />
           <button id="submit" onClick={() => addNewImage(url)}>
             Submit
